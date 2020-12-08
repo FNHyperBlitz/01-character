@@ -21,7 +21,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, mySprite, 50, 0)
+        `, mySprite, 100, 0)
     mySprite.startEffect(effects.rings)
 })
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
@@ -46,9 +46,12 @@ controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     myEnemy.destroy()
+    game.over(true)
+    controller.startLightAnimation(light.rainbowAnimation, 5000)
+    effects.confetti.endScreenEffect()
 })
 controller.combos.attachCombo("rt", function () {
-    projectile.setFlag(SpriteFlag.BounceOnWall, true)
+    projectile.setFlag(SpriteFlag.DestroyOnWall, true)
     projectile.setFlag(SpriteFlag.BounceOnWall, true)
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
@@ -56,13 +59,16 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     myenemy2.destroy()
+    game.over(true)
+    controller.startLightAnimation(light.rainbowAnimation, 500)
+    effects.confetti.endScreenEffect()
 })
 let projectile: Sprite = null
 let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let myenemy2: Sprite = null
 let myEnemy: Sprite = null
-tiles.loadMap(tiles.createMap(tiles.createTilemap(hex`100010000102030303030303030303030400000001050b0b0b0b0b0b0b0b0b0b0a0000000c050b0b0b0b0b0b0b0b0b0b0a00000009050b0b0b0b0b0b0b0b0b0b0a00000009050b0b0b0b0b0b0b0b0b0b0a00000009050b0b0b0b0b0b0b0b0b0b0a00000009050b0b0b0b0b0b0b0b0b0b0a000000090607070707070707070707080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
+tiles.loadMap(tiles.createMap(tiles.createTilemap(hex`1000100001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010201010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -79,7 +85,7 @@ tiles.loadMap(tiles.createMap(tiles.createTilemap(hex`10001000010203030303030303
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, [myTiles.transparency16,sprites.castle.tileGrass2,sprites.castle.tilePath1,sprites.castle.tilePath2,sprites.castle.tilePath3,sprites.castle.tilePath4,sprites.castle.tilePath7,sprites.castle.tilePath8,sprites.castle.tilePath9,sprites.castle.tileGrass3,sprites.castle.tilePath6,sprites.castle.tilePath5,sprites.castle.tileGrass1], TileScale.Sixteen)))
+    `, [myTiles.transparency16,sprites.castle.tileGrass3,sprites.castle.tileGrass1], TileScale.Sixteen)))
 myEnemy = sprites.create(img`
     ........................
     ........................
